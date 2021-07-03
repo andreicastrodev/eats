@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Header.module.css";
 import { ReactComponent as HeaderMode } from "../../misc/svg/mode.svg";
 import { ReactComponent as HeaderBookmark } from "../../misc/svg/bookmark.svg";
+import { useDispatch } from "react-redux";
+import { fetchSearchAndResult } from "../../store/actions";
 const Header = () => {
+  const [searchField, setSearchField] = useState("");
+  const dispatch = useDispatch();
   const image = require("../../misc/img/pasta.jpg").default;
 
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(fetchSearchAndResult(searchField));
+  };
+
+  const handleSearchField = (e) => {
+    setSearchField(e.target.value);
+  };
   return (
     <div className={styles.header}>
       <h1 className={styles.headerTitle}>Eatsys</h1>
-      <form className={styles.headerForm}>
+      <form onSubmit={formSubmitHandler} className={styles.headerForm}>
         <input
           className={styles.headerInput}
           type="text"
           placeholder="Search recipes now!"
+          value={searchField}
+          onChange={handleSearchField}
         />
         <button className={styles.headerBtn}>Search</button>
       </form>

@@ -1,21 +1,33 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styles from "./Results.module.css";
 const Results = () => {
   const image = require("../../misc/img/pasta.jpg").default;
+  const results = useSelector((state) => state.recipe.search.results);
 
+  console.log(results);
   return (
     <ul className={styles.results}>
-      {/* <p className={styles.resultsMsg}>Search now! :)</p> */}
       <li>
-        <a className={styles.resultsBox}>
-          <figure className={styles.resultsFig}>
-            <img className={styles.resultsImg} src={image} alt="" />
-          </figure>
-          <div className={styles.resultsInfo}>
-            <p className={styles.resultsTitle}>Best pizza in da town</p>
-            <span className={styles.resultsCook}>Nigger Planet</span>
-          </div>
-        </a>
+        {results.map((result) => (
+          <a
+            href={`#${result.recipe_id}`}
+            className={styles.resultsBox}
+            key={result.recipe_id}
+          >
+            <figure className={styles.resultsFig}>
+              <img
+                className={styles.resultsImg}
+                src={result.image_url}
+                alt=""
+              />
+            </figure>
+            <div className={styles.resultsInfo}>
+              <p className={styles.resultsTitle}>{result.title}</p>
+              <span className={styles.resultsCook}>{result.publisher}</span>
+            </div>
+          </a>
+        ))}
       </li>
     </ul>
   );
