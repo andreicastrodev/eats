@@ -50,8 +50,8 @@ const Header = () => {
                     <img className={styles.headerImg} src={image} alt="" />
                   </figure>
                   <div className={styles.headerData}>
-                    <h4 className={styles.headerDataTitle}>Nigga Pizza</h4>
-                    <p className={styles.headerDataPublisher}>Da Hoodz</p>
+                    <h4 className={styles.headerDataTitle}> Pizza</h4>
+                    <p className={styles.headerDataPublisher}>Da </p>
                   </div>
                 </a>
               </li>

@@ -3,14 +3,26 @@ import { ReactComponent as TimeToCook } from "../../misc/svg/time.svg";
 import { ReactComponent as ServingToCook } from "../../misc/svg/serving.svg";
 
 import styles from "./Recipe.module.css";
+import { useSelector } from "react-redux";
 const Recipe = () => {
-  const image = require("../../misc/img/pasta.jpg").default;
+  const recipe = useSelector((state) => state.recipe.recipe);
+
+  const newRecipe = {
+    title: recipe.payload.title,
+    publisher: recipe.payload.publisher,
+    publisherUrl: recipe.payload.publisher_url,
+    imageUrl: recipe.payload.image_url,
+    recipeId: recipe.payload.recipe_id,
+    socialRank: recipe.payload.social_rank,
+    sourceUrl: recipe.payload.source_url,
+    ingredients: recipe.payload.ingredients,
+  };
 
   return (
     <div className={styles.recipe}>
-      <img className={styles.recipeImg} src={image} alt="" />
+      <img className={styles.recipeImg} src={newRecipe.imageUrl} alt="" />
       <div className={styles.recipeTitleBlock}>
-        <h2 className={styles.recipeTitle}>Best Pizza in the hood Nigga</h2>
+        <h2 className={styles.recipeTitle}>{newRecipe.title}</h2>
       </div>
       <div className={styles.recipeCookInfo}>
         <div className={styles.recipeTime}>
@@ -25,56 +37,19 @@ const Recipe = () => {
 
       <div className={styles.recipeIngredients}>
         <ul className={styles.recipeIngredientsList}>
-          <li className={styles.recipeList}>
-            <div className={styles.recipeCount}>1000</div>
-            <div className={styles.recipeIngredient}>
-              <span className={styles.recipeUnit}>g</span>
-              pasta
-            </div>
-          </li>
-          <li className={styles.recipeList}>
-            <div className={styles.recipeCount}>1000</div>
-            <div className={styles.recipeIngredient}>
-              <span className={styles.recipeUnit}>g</span>
-              pasta
-            </div>
-          </li>
-          <li className={styles.recipeList}>
-            <div className={styles.recipeCount}>1000</div>
-            <div className={styles.recipeIngredient}>
-              <span className={styles.recipeUnit}>g</span>
-              pasta
-            </div>
-          </li>
-          <li className={styles.recipeList}>
-            <div className={styles.recipeCount}>1000</div>
-            <div className={styles.recipeIngredient}>
-              <span className={styles.recipeUnit}>g</span>
-              pasta
-            </div>
-          </li>
-          <li className={styles.recipeList}>
-            <div className={styles.recipeCount}>1000</div>
-            <div className={styles.recipeIngredient}>
-              <span className={styles.recipeUnit}>g</span>
-              pasta
-            </div>
-          </li>
-          <li className={styles.recipeList}>
-            <div className={styles.recipeCount}>1000</div>
-            <div className={styles.recipeIngredient}>
-              <span className={styles.recipeUnit}>g</span>
-              pasta
-            </div>
-          </li>
+          {newRecipe.ingredients.map((item, i) => (
+            <li className={styles.recipeList} key={i}>
+              <div className={styles.recipeIngredient}>{item}</div>
+            </li>
+          ))}
         </ul>
       </div>
 
       <div className={styles.recipeDirections}>
         <h2 className={styles.recipeTitle1}>How to Cook It</h2>
         <p className={styles.recipeText}>
-          This recipe was carefully designed and tested by Closet Cooking.
-          Please check out directions at their website.
+          This recipe was carefully designed and tested by {newRecipe.publisher}
+          . Please check out directions at their website.
         </p>
         <button className={styles.recipeBtn}>Directions</button>
       </div>

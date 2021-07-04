@@ -16,6 +16,10 @@ const recipesSlice = createSlice({
       state.search.query = payload.query;
       state.search.results = payload.DATA.recipes;
     },
+
+    addRecipeOnHashChange(state, action) {
+      state.recipe = action.payload;
+    },
   },
 });
 
