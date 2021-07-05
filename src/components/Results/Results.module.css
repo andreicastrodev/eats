@@ -13,10 +13,10 @@
 }
 
 .resultsFig {
-  flex: 0 0 10rem;
+  flex: 0 0 8rem;
   border-radius: 50%;
   overflow: hidden;
-  height: 10rem;
+  height: 8rem;
   margin-right: 2rem;
   position: relative;
   backface-visibility: hidden;
@@ -34,12 +34,13 @@
 .resultsBox:link,
 .resultsBox:visited {
   display: flex;
-  justify-content: space-between;
   width: 100%;
   align-items: center;
   margin: 1rem;
   padding: 2rem 5rem;
   cursor: pointer;
+  color: black;
+  text-decoration: none;
 }
 
 .resultsBox:hover {
@@ -51,13 +52,13 @@
 }
 
 .resultsTitle {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 700;
   text-transform: uppercase;
 }
 
 .resultsCook {
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   font-weight: 500;
   text-transform: uppercase;
 }

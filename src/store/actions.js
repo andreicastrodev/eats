@@ -1,9 +1,10 @@
 import { recipesActions } from "./recipe-slice";
-
+import { loadingActions } from "./loading-slice";
 export const fetchSearchAndResult = (query) => {
   return async (dispatch) => {
     const handleFetchRecipes = async () => {
       try {
+        dispatch(loadingActions.setResultsSpinner());
         const RES = await fetch(
           `https://forkify-api.herokuapp.com/api/search?q=${query}`
         );
@@ -17,6 +18,7 @@ export const fetchSearchAndResult = (query) => {
         dispatch(
           recipesActions.addQueryAndResults({ payload: { query, DATA } })
         );
+        dispatch(loadingActions.setResultsSpinner());
       } catch (error) {
         console.error(error);
       }
@@ -29,6 +31,8 @@ export const fetchRecipe = () => {
   return async (dispatch) => {
     const handleFechRecipe = async () => {
       try {
+        dispatch(loadingActions.setRecipeSpinner());
+
         const id = window.location.hash.slice(1);
         console.log(id);
         if (id.length === 5) {
@@ -43,6 +47,7 @@ export const fetchRecipe = () => {
           dispatch(
             recipesActions.addRecipeOnHashChange({ payload: DATA.recipe })
           );
+          dispatch(loadingActions.setRecipeSpinner());
         } else return;
         if (!id) return;
       } catch (error) {
